@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuujaogdfrh4o"]
+
+[ext_resource type="Script" path="res://Scripts/menu_pausa.gd" id="1_ru5v7"]
+[ext_resource type="FontFile" uid="uid://dw731pysbful3" path="res://fuente/daydream_3/Daydream.ttf" id="2_b3ua6"]
+
+[node name="meuPausa" type="CanvasLayer"]
+process_mode = 3
+layer = -1
+script = ExtResource("1_ru5v7")
+
+[node name="fondo" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.631373)
+
+[node name="btnReanudar" type="Button" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.472
+anchor_top = 0.284
+anchor_right = 0.472
+anchor_bottom = 0.284
+offset_left = -79.744
+offset_top = -32.032
+offset_right = 80.256
+offset_bottom = 31.968
+theme_override_fonts/font = ExtResource("2_b3ua6")
+theme_override_font_sizes/font_size = 17
+text = "REANUDAR"
+
+[node name="btnReiniciar" type="Button" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 2.5
+anchor_right = 0.5
+anchor_bottom = 2.5
+offset_left = -112.0
+offset_top = -1340.0
+offset_right = 48.0
+offset_bottom = -1276.0
+theme_override_fonts/font = ExtResource("2_b3ua6")
+theme_override_font_sizes/font_size = 17
+text = "REINICIAR"
+
+[node name="btnSalir" type="Button" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 2.5
+anchor_right = 0.5
+anchor_bottom = 2.5
+offset_left = -112.0
+offset_top = -1212.0
+offset_right = 48.0
+offset_bottom = -1148.0
+theme_override_fonts/font = ExtResource("2_b3ua6")
+theme_override_font_sizes/font_size = 17
+text = "SALIR"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="btnReanudar" to="." method="_on_btn_reanudar_pressed"]
+[connection signal="pressed" from="btnReiniciar" to="." method="_on_btn_reiniciar_pressed"]
+[connection signal="pressed" from="btnSalir" to="." method="_on_btn_salir_pressed"]

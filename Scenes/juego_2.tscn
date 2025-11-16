@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://bp8d60gi3j2sp"]
+
+[ext_resource type="Script" path="res://Scripts/juego_2.gd" id="1_bfk2n"]
+[ext_resource type="PackedScene" uid="uid://bsk4a2gdn0rql" path="res://Scenes/suelo.tscn" id="1_u5vy4"]
+[ext_resource type="Texture2D" uid="uid://btkm06j5bd63l" path="res://images/jungla.jpg" id="2_prx1x"]
+[ext_resource type="PackedScene" uid="uid://bjneeupkx2eib" path="res://sprites/jugador.tscn" id="2_woofo"]
+[ext_resource type="PackedScene" uid="uid://brh3pnmx1a3nh" path="res://Scenes/coco.tscn" id="4_c4f8s"]
+[ext_resource type="PackedScene" uid="uid://bcgeeic3rqnjs" path="res://Scenes/barril.tscn" id="5_0m6fm"]
+[ext_resource type="FontFile" uid="uid://dw731pysbful3" path="res://fuente/daydream_3/Daydream.ttf" id="7_fuijy"]
+[ext_resource type="PackedScene" uid="uid://cuujaogdfrh4o" path="res://Scenes/menuPausa.tscn" id="8_bbj0o"]
+[ext_resource type="PackedScene" uid="uid://b4lcctw8qtiv3" path="res://Scenes/pantalla_muerte.tscn" id="9_s6kfh"]
+
+[node name="juego2" type="Node"]
+script = ExtResource("1_bfk2n")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_top = 0.012
+anchor_right = 1.0
+anchor_bottom = 0.963
+offset_top = -7.776
+offset_bottom = -0.0240479
+texture = ExtResource("2_prx1x")
+
+[node name="suelo" parent="." instance=ExtResource("1_u5vy4")]
+
+[node name="Jugador" parent="." instance=ExtResource("2_woofo")]
+position = Vector2(544, 544)
+
+[node name="coco" parent="." instance=ExtResource("4_c4f8s")]
+position = Vector2(-176, 48)
+
+[node name="barril" parent="." instance=ExtResource("5_0m6fm")]
+position = Vector2(-120, 80)
+
+[node name="vidas" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.049
+anchor_right = 0.104
+anchor_bottom = 0.136
+offset_left = -0.0640001
+offset_top = 0.247999
+offset_right = 0.192001
+offset_bottom = -0.128006
+theme_override_fonts/font = ExtResource("7_fuijy")
+theme_override_font_sizes/font_size = 31
+text = "Vidas: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Puntos" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.653
+anchor_top = 0.043
+anchor_right = 0.937
+anchor_bottom = 0.164
+offset_left = -0.256042
+offset_top = 4.136
+offset_right = 0.575928
+offset_bottom = -2.272
+theme_override_fonts/font = ExtResource("7_fuijy")
+theme_override_font_sizes/font_size = 26
+text = "SCORE:"
+vertical_alignment = 1
+
+[node name="meuPausa" parent="." instance=ExtResource("8_bbj0o")]
+layer = 1
+
+[node name="pantallaMuerte" parent="." instance=ExtResource("9_s6kfh")]
+visible = false
+
+[connection signal="visibility_changed" from="pantallaMuerte" to="." method="_on_pantalla_muerte_visibility_changed"]

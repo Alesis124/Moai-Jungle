@@ -1,0 +1,161 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbvp8beyt4730"]
+
+[ext_resource type="Script" path="res://Scripts/sonido.gd" id="1_60bd7"]
+
+[node name="Sonido" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_60bd7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.125911, 0.125911, 0.125911, 1)
+
+[node name="txtGeneral" type="Label" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.204
+anchor_top = 0.221
+anchor_right = 0.204
+anchor_bottom = 0.221
+offset_left = -76.008
+offset_top = -27.208
+offset_right = 75.992
+offset_bottom = 27.792
+theme_override_font_sizes/font_size = 40
+text = "General"
+
+[node name="porcentaje" type="Label" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.395
+anchor_top = 0.225
+anchor_right = 0.395
+anchor_bottom = 0.225
+offset_left = -48.04
+offset_top = -16.8
+offset_right = 47.96
+offset_bottom = 17.2
+theme_override_font_sizes/font_size = 24
+text = "Numero"
+
+[node name="VolumenGeneral" type="HSlider" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.708
+anchor_top = 0.227
+anchor_right = 0.708
+anchor_bottom = 0.227
+offset_left = -304.616
+offset_top = -30.096
+offset_right = 304.384
+offset_bottom = 29.904
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+
+[node name="txtMusica" type="Label" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.203
+anchor_top = 0.41
+anchor_right = 0.203
+anchor_bottom = 0.41
+offset_left = -75.856
+offset_top = -27.68
+offset_right = 76.144
+offset_bottom = 27.32
+theme_override_font_sizes/font_size = 40
+text = "Musica"
+
+[node name="porcentaje2" type="Label" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.394
+anchor_top = 0.414
+anchor_right = 0.394
+anchor_bottom = 0.414
+offset_left = -47.888
+offset_top = -17.272
+offset_right = 48.112
+offset_bottom = 16.728
+theme_override_font_sizes/font_size = 24
+text = "Numero"
+
+[node name="VolumenMusica" type="HSlider" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.707
+anchor_top = 0.415
+anchor_right = 0.707
+anchor_bottom = 0.415
+offset_left = -304.464
+offset_top = -29.92
+offset_right = 304.536
+offset_bottom = 30.08
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+
+[node name="txtEfectos" type="Label" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.205
+anchor_top = 0.6
+anchor_right = 0.205
+anchor_bottom = 0.6
+offset_left = -76.16
+offset_top = -27.8
+offset_right = 75.84
+offset_bottom = 27.2
+theme_override_font_sizes/font_size = 40
+text = "Efectos"
+
+[node name="porcentaje3" type="Label" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.396
+anchor_top = 0.603
+anchor_right = 0.396
+anchor_bottom = 0.603
+offset_left = -48.192
+offset_top = -16.744
+offset_right = 47.808
+offset_bottom = 17.256
+theme_override_font_sizes/font_size = 24
+text = "Numero"
+
+[node name="VolumenEfectos" type="HSlider" parent="ColorRect"]
+layout_mode = 2
+anchor_left = 0.709
+anchor_top = 0.605
+anchor_right = 0.709
+anchor_bottom = 0.605
+offset_left = -304.768
+offset_top = -30.04
+offset_right = 304.232
+offset_bottom = 29.96
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+
+[node name="btnAceptar" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.924
+anchor_top = 0.951
+anchor_right = 0.924
+anchor_bottom = 0.951
+offset_left = -57.448
+offset_top = -21.248
+offset_right = 58.552
+offset_bottom = 20.752
+theme_override_font_sizes/font_size = 24
+text = "ACEPTAR"
+
+[connection signal="ready" from="ColorRect/porcentaje" to="." method="_on_porcentaje_ready"]
+[connection signal="value_changed" from="ColorRect/VolumenGeneral" to="." method="_on_volumen_general_value_changed"]
+[connection signal="value_changed" from="ColorRect/VolumenMusica" to="." method="_on_volumen_musica_value_changed"]
+[connection signal="value_changed" from="ColorRect/VolumenEfectos" to="." method="_on_volumen_efectos_value_changed"]
+[connection signal="pressed" from="btnAceptar" to="." method="_on_btn_aceptar_pressed"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsk4a2gdn0rql"]
+
+[ext_resource type="Texture2D" uid="uid://4q4ap0qvpob5" path="res://images/ground.png" id="1_e6e7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfyqp"]
+size = Vector2(2304, 89)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vwh5f"]
+b = Vector2(0, 568)
+
+[node name="suelo" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-536, 568)
+texture = ExtResource("1_e6e7c")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(616, 616)
+shape = SubResource("RectangleShape2D_dfyqp")
+
+[node name="pared_izq" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_vwh5f")
+
+[node name="pared_dr" type="CollisionShape2D" parent="."]
+position = Vector2(1152, 0)
+shape = SubResource("SegmentShape2D_vwh5f")

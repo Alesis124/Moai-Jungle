@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://bcgeeic3rqnjs"]
+
+[ext_resource type="Texture2D" uid="uid://cmob3l02yq0bf" path="res://images/barril.png" id="1_v5snp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynuk3"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(2, 1, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wcsr"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(55, 1, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8oyv"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(110, 1, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xam3"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(164, 1, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia7eg"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(2, 56, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqgwj"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(56, 56, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_preoa"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(110, 56, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7m362"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(164, 56, 52, 52)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5hue"]
+atlas = ExtResource("1_v5snp")
+region = Rect2(2, 111, 52, 52)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ybrvm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynuk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wcsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8oyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xam3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ia7eg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqgwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_preoa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7m362")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_h5hue")
+}],
+"loop": true,
+"name": &"movimiento",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bdmwa"]
+radius = 24.0
+
+[node name="barril" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ybrvm")
+animation = &"movimiento"
+autoplay = "movimiento"
+frame_progress = 0.288635
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bdmwa")
