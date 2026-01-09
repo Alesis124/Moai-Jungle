@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bp8d60gi3j2sp"]
 
-[ext_resource type="Script" path="res://Scripts/juego_2.gd" id="1_bfk2n"]
+[ext_resource type="Script" uid="uid://b8wirmjd5wf28" path="res://Scripts/juego_2.gd" id="1_bfk2n"]
 [ext_resource type="PackedScene" uid="uid://bsk4a2gdn0rql" path="res://Scenes/suelo.tscn" id="1_u5vy4"]
 [ext_resource type="Texture2D" uid="uid://btkm06j5bd63l" path="res://images/jungla.jpg" id="2_prx1x"]
 [ext_resource type="PackedScene" uid="uid://bjneeupkx2eib" path="res://sprites/jugador.tscn" id="2_woofo"]
