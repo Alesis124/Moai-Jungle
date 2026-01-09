@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://bjneeupkx2eib"]
 
-[ext_resource type="Script" path="res://sprites/jugador.gd" id="1_meia1"]
+[ext_resource type="Script" path="res://Scripts/jugador.gd" id="1_meia1"]
 [ext_resource type="Texture2D" uid="uid://bgutm0j2a1v5k" path="res://images/correr/pegaos.png" id="2_5gpi3"]
 [ext_resource type="Texture2D" uid="uid://du4cr6l3rqau2" path="res://images/correr/estatico.png" id="3_v6fbt"]
 
@@ -91,13 +91,12 @@ script = ExtResource("1_meia1")
 position = Vector2(13, -19)
 shape = SubResource("RectangleShape2D_fxd7f")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Movimiento_jugador" type="AnimatedSprite2D" parent="."]
 position = Vector2(13.6977, -19.1959)
 scale = Vector2(0.72061, 0.65485)
 sprite_frames = SubResource("SpriteFrames_ac4hc")
-animation = &"caminar"
+animation = &"estatico"
 autoplay = "estatico"
-frame_progress = 0.0713591
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

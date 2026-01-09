@@ -1,8 +1,9 @@
 extends Control
-@onready var brillo = $ColorRect
 
 func _ready() -> void:
-	brillo.modulate.a = GlobalBrightnes.brillo
+	get_window().title = "Moai Jungle"
+
+
 
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/seleccion_videojuego.tscn")

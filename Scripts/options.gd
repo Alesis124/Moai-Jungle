@@ -1,8 +1,7 @@
 extends Control
-@onready var brillo = $ColorRect
 
 func _ready() -> void:
-	brillo.modulate.a = GlobalBrightnes.brillo
+	pass
 
 func _on_sonido_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Sonido.tscn")

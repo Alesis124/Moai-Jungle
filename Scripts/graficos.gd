@@ -1,6 +1,6 @@
 extends Control
 
-@onready var porcentaje = $ColorRect/Porcentaje
+
 @onready var opcion = $ColorRect/OpcionGraficos
 
 

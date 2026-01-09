@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://3omkwtnou0kp"]
+
+[ext_resource type="Script" path="res://Scripts/seleccion_juego.gd" id="1_7e4hm"]
+[ext_resource type="Texture2D" uid="uid://bkj3li2mg23f7" path="res://images/fond.jpg" id="2_l22ae"]
+[ext_resource type="Texture2D" uid="uid://clguq44ielnxg" path="res://images/jungla_icono.jpg" id="3_e4hwa"]
+[ext_resource type="Texture2D" uid="uid://cfmsm4hf2yuwp" path="res://images/atras.png" id="4_5dnnh"]
+
+[node name="Seleccion" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7e4hm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.355314, 0.355314, 0.355314, 1)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_l22ae")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -68.0
+offset_right = 68.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="Juego1" type="Button" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("3_e4hwa")
+
+[node name="btnBack" type="Button" parent="ColorRect"]
+layout_mode = 1
+offset_right = 74.0
+offset_bottom = 79.0
+icon = ExtResource("4_5dnnh")
+flat = true
+expand_icon = true
+
+[connection signal="pressed" from="ColorRect/HBoxContainer/Juego1" to="." method="_on_juego_1_pressed"]
+[connection signal="pressed" from="ColorRect/btnBack" to="." method="_on_btn_back_pressed"]

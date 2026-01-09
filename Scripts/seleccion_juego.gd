@@ -1,9 +1,9 @@
 extends Node
 
-@onready var brillo = $ColorRect
+
 
 func _ready() -> void:
-	brillo.modulate.a = GlobalBrightnes.brillo
+	pass
 
 
 

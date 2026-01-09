@@ -11,17 +11,20 @@ b = Vector2(0, 568)
 [node name="suelo" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-536, 568)
+position = Vector2(616, 624)
 texture = ExtResource("1_e6e7c")
-centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(616, 616)
 shape = SubResource("RectangleShape2D_dfyqp")
 
-[node name="pared_izq" type="CollisionShape2D" parent="."]
+[node name="pared_dr" type="StaticBody2D" parent="." groups=["Pared"]]
+position = Vector2(1152, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pared_dr"]
 shape = SubResource("SegmentShape2D_vwh5f")
 
-[node name="pared_dr" type="CollisionShape2D" parent="."]
-position = Vector2(1152, 0)
+[node name="pared_izq" type="StaticBody2D" parent="." groups=["Pared"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pared_izq"]
 shape = SubResource("SegmentShape2D_vwh5f")

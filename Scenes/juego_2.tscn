@@ -1,14 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://bp8d60gi3j2sp"]
+[gd_scene load_steps=16 format=3 uid="uid://bp8d60gi3j2sp"]
 
 [ext_resource type="Script" path="res://Scripts/juego_2.gd" id="1_bfk2n"]
 [ext_resource type="PackedScene" uid="uid://bsk4a2gdn0rql" path="res://Scenes/suelo.tscn" id="1_u5vy4"]
 [ext_resource type="Texture2D" uid="uid://btkm06j5bd63l" path="res://images/jungla.jpg" id="2_prx1x"]
 [ext_resource type="PackedScene" uid="uid://bjneeupkx2eib" path="res://sprites/jugador.tscn" id="2_woofo"]
-[ext_resource type="PackedScene" uid="uid://brh3pnmx1a3nh" path="res://Scenes/coco.tscn" id="4_c4f8s"]
-[ext_resource type="PackedScene" uid="uid://bcgeeic3rqnjs" path="res://Scenes/barril.tscn" id="5_0m6fm"]
+[ext_resource type="PackedScene" uid="uid://brh3pnmx1a3nh" path="res://sprites/coco.tscn" id="4_c4f8s"]
+[ext_resource type="PackedScene" uid="uid://bcgeeic3rqnjs" path="res://sprites/barril.tscn" id="5_0m6fm"]
 [ext_resource type="FontFile" uid="uid://dw731pysbful3" path="res://fuente/daydream_3/Daydream.ttf" id="7_fuijy"]
 [ext_resource type="PackedScene" uid="uid://cuujaogdfrh4o" path="res://Scenes/menuPausa.tscn" id="8_bbj0o"]
 [ext_resource type="PackedScene" uid="uid://b4lcctw8qtiv3" path="res://Scenes/pantalla_muerte.tscn" id="9_s6kfh"]
+[ext_resource type="PackedScene" uid="uid://fgjd0xyh6dk4" path="res://sprites/corazon.tscn" id="10_d3jak"]
+[ext_resource type="PackedScene" uid="uid://dwpkw3wqi7g80" path="res://sprites/escudo.tscn" id="11_n2uyo"]
+[ext_resource type="PackedScene" uid="uid://640okotqjugx" path="res://sprites/ala.tscn" id="12_qje04"]
+[ext_resource type="PackedScene" uid="uid://dew21bytyny3j" path="res://sprites/zapa.tscn" id="13_d1w27"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10vco"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 0.552941)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17ond"]
+bg_color = Color(0.788235, 0.807843, 0, 0.811765)
 
 [node name="juego2" type="Node"]
 script = ExtResource("1_bfk2n")
@@ -28,20 +38,19 @@ texture = ExtResource("2_prx1x")
 position = Vector2(544, 544)
 
 [node name="coco" parent="." instance=ExtResource("4_c4f8s")]
-position = Vector2(-176, 48)
+position = Vector2(-784, -48)
 
 [node name="barril" parent="." instance=ExtResource("5_0m6fm")]
-position = Vector2(-120, 80)
+position = Vector2(-784, 112)
 
 [node name="vidas" type="Label" parent="."]
 anchors_preset = -1
-anchor_left = 0.007
-anchor_top = 0.049
-anchor_right = 0.104
+anchor_top = 0.043
+anchor_right = 0.161
 anchor_bottom = 0.136
-offset_left = -0.0640001
-offset_top = 0.247999
-offset_right = 0.192001
+offset_left = 8.0
+offset_top = 4.136
+offset_right = -65.472
 offset_bottom = -0.128006
 theme_override_fonts/font = ExtResource("7_fuijy")
 theme_override_font_sizes/font_size = 31
@@ -70,4 +79,31 @@ layer = 1
 [node name="pantallaMuerte" parent="." instance=ExtResource("9_s6kfh")]
 visible = false
 
+[node name="Escudo" parent="." instance=ExtResource("11_n2uyo")]
+position = Vector2(-784, 240)
+
+[node name="Corazon" parent="." instance=ExtResource("10_d3jak")]
+position = Vector2(-784, 176)
+
+[node name="Duracion" type="ProgressBar" parent="."]
+anchors_preset = -1
+anchor_left = 0.278
+anchor_right = 0.722
+anchor_bottom = 0.049
+offset_left = -0.256042
+offset_top = 8.0
+offset_right = 0.25592
+offset_bottom = 3.248
+theme_override_styles/background = SubResource("StyleBoxFlat_10vco")
+theme_override_styles/fill = SubResource("StyleBoxFlat_17ond")
+max_value = 5.0
+show_percentage = false
+
+[node name="Ala" parent="." instance=ExtResource("12_qje04")]
+position = Vector2(-784, 51)
+
+[node name="Zapa" parent="." instance=ExtResource("13_d1w27")]
+position = Vector2(-784, 0)
+
+[connection signal="choco_con_pared" from="barril" to="." method="_on_barril_choco_con_pared"]
 [connection signal="visibility_changed" from="pantallaMuerte" to="." method="_on_pantalla_muerte_visibility_changed"]

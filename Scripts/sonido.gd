@@ -8,7 +8,6 @@ extends Control
 @onready var barraGeneral = $ColorRect/VolumenGeneral
 @onready var barraMusica = $ColorRect/VolumenMusica
 @onready var barraEfectos = $ColorRect/VolumenEfectos
-@onready var brillo = $ColorRect
 
 var global_volume: float = 1.0
 var music_volume: float = 1.0
@@ -28,8 +27,7 @@ func _ready() -> void:
 	porcentaje2.text = str(int(barraMusica.value))+" %"
 	porcentaje3.text = str(int(barraEfectos.value))+" %"
 	
-	brillo.modulate.a = GlobalBrightnes.brillo
-	
+
 
 
 

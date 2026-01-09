@@ -43,6 +43,10 @@ func _input(event): #Detecta el teclado
 			GlobalAudio.stream.loop = true
 			GlobalAudio.play()
 			Efectos.stop()
+		if event.is_action_pressed("Reiniciar"):
+			get_tree().paused = not get_tree().paused
+			get_tree().change_scene_to_file("res://Scenes/juego_2.tscn")
+			Efectos.stop()
 
 
 func _on_visibility_changed() -> void:

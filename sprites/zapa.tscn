@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dew21bytyny3j"]
+
+[ext_resource type="Script" path="res://Scripts/zapa.gd" id="1_6t4um"]
+[ext_resource type="Texture2D" uid="uid://c3abjxrv8lpfo" path="res://images/zapatilla.png" id="1_ayo7a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvpjf"]
+atlas = ExtResource("1_ayo7a")
+region = Rect2(27, 72, 407, 245)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4y17j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvpjf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctuxv"]
+size = Vector2(48, 34)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_6t4um")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.251324, -0.915193)
+scale = Vector2(0.116701, 0.138083)
+sprite_frames = SubResource("SpriteFrames_4y17j")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_ctuxv")
