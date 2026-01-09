@@ -74,8 +74,8 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/hover = SubResource("StyleBoxFlat_jalle")
 text = "VOLVER"
 
-[connection signal="pressed" from="ColorRect/VBoxContainer/Sonido" to="." method="_on_sonido_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/Sonido" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Sonido" to="." method="_on_sonido_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/Graficos" to="." method="_on_graficos_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/Volver" to="." method="_on_volver_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/Volver" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Volver" to="." method="_on_volver_pressed"]
