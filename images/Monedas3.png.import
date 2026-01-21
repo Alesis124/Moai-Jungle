@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2nl43e6eia2l"
-path="res://.godot/imported/heart pixel art 64x64.png-4845b739c02b024e10e5aa93c67971bf.ctex"
+uid="uid://ckegpdt0uajt2"
+path="res://.godot/imported/Monedas3.png-2484e254218cf18be32d6e03b56b84dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/heart pixel art 64x64.png"
-dest_files=["res://.godot/imported/heart pixel art 64x64.png-4845b739c02b024e10e5aa93c67971bf.ctex"]
+source_file="res://images/Monedas3.png"
+dest_files=["res://.godot/imported/Monedas3.png-2484e254218cf18be32d6e03b56b84dd.ctex"]
 
 [params]
 

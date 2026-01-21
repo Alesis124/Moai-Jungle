@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://640okotqjugx"]
 
-[ext_resource type="Script" path="res://Scripts/ala.gd" id="1_av8dx"]
+[ext_resource type="Script" uid="uid://b6fclxen2yj6i" path="res://Scripts/ala.gd" id="1_av8dx"]
 [ext_resource type="Texture2D" uid="uid://dv5eblwt6bbtl" path="res://images/ala.png" id="1_vlccm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n1twu"]

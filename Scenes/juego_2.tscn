@@ -58,7 +58,7 @@ text = "Vidas: "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Puntos" type="Label" parent="."]
+[node name="Tiempo" type="Label" parent="."]
 anchors_preset = -1
 anchor_left = 0.653
 anchor_top = 0.043
@@ -70,7 +70,7 @@ offset_right = 0.575928
 offset_bottom = -2.272
 theme_override_fonts/font = ExtResource("7_fuijy")
 theme_override_font_sizes/font_size = 26
-text = "SCORE:"
+text = "Time:"
 vertical_alignment = 1
 
 [node name="meuPausa" parent="." instance=ExtResource("8_bbj0o")]
@@ -104,6 +104,52 @@ position = Vector2(-784, 51)
 
 [node name="Zapa" parent="." instance=ExtResource("13_d1w27")]
 position = Vector2(-784, 0)
+
+[node name="ComboLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.80600005
+anchor_top = 0.21400002
+anchor_right = 0.80600005
+anchor_bottom = 0.21400002
+offset_left = -20.512085
+offset_top = -25.672012
+offset_right = 19.487915
+offset_bottom = 25.327988
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9524457, 0.9524458, 3.85046e-06, 1)
+theme_override_fonts/font = ExtResource("7_fuijy")
+theme_override_font_sizes/font_size = 38
+
+[node name="MonedasLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.057000004
+anchor_top = 0.24800001
+anchor_right = 0.057000004
+anchor_bottom = 0.24800001
+offset_left = -55.664
+offset_top = -13.70401
+offset_right = 55.336
+offset_bottom = 14.29599
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("7_fuijy")
+theme_override_font_sizes/font_size = 20
+text = "Monedas: 0"
+
+[node name="PuntosLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = -2.084
+anchor_top = 1.174
+anchor_right = -2.084
+anchor_bottom = 1.174
+offset_left = 2410.768
+offset_top = -661.752
+offset_right = 2527.768
+offset_bottom = -626.752
+theme_override_fonts/font = ExtResource("7_fuijy")
+theme_override_font_sizes/font_size = 26
+text = "Score:"
+vertical_alignment = 1
 
 [connection signal="choco_con_pared" from="barril" to="." method="_on_barril_choco_con_pared"]
 [connection signal="visibility_changed" from="pantallaMuerte" to="." method="_on_pantalla_muerte_visibility_changed"]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bayskwf6mcljj"]
+
+[ext_resource type="Script" uid="uid://dky1rsdticbce" path="res://Scripts/coin.gd" id="1_k6x8x"]
+[ext_resource type="Texture2D" uid="uid://ckegpdt0uajt2" path="res://images/Monedas3.png" id="2_j7apm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdgrv"]
+atlas = ExtResource("2_j7apm")
+region = Rect2(19, 0, 66, 97)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k6x8x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdgrv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k6x8x"]
+radius = 30.0
+
+[node name="Coin" type="Area2D"]
+script = ExtResource("1_k6x8x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k6x8x")
+autoplay = "default"
+frame_progress = 0.9359676
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_k6x8x")
