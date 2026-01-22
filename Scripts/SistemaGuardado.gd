@@ -11,6 +11,14 @@ static var datos_juego = {
 		"velocidad": 0,
 		"duracion_poderes": 0,
 		"imanes": 0
+	},
+	# NUEVO: Datos de la última partida
+	"ultima_partida": {
+		"puntos": 0,
+		"monedas_ganadas": 0,
+		"monedas_totales": 0,
+		"nuevo_record": false,
+		"tiempo_sobrevivido": 0.0
 	}
 }
 
@@ -50,6 +58,17 @@ static func cargar_datos():
 				datos_juego = file.get_var()
 				file.close()
 				print("📂 Datos cargados")
+				
+				# Verificar que la estructura sea correcta
+				if not "ultima_partida" in datos_juego:
+					datos_juego["ultima_partida"] = {
+						"puntos": 0,
+						"monedas_ganadas": 0,
+						"monedas_totales": 0,
+						"nuevo_record": false,
+						"tiempo_sobrevivido": 0.0
+					}
+					guardar_datos()
 			else:
 				print("⚠️ Archivo vacío, creando nuevo")
 				file.close()
@@ -60,6 +79,65 @@ static func cargar_datos():
 	else:
 		print("📝 Creando archivo nuevo")
 		guardar_datos()
+
+# ============================================
+# FUNCIONES PARA ÚLTIMA PARTIDA (NUEVAS)
+# ============================================
+
+# Guardar datos de la última partida jugada
+static func guardar_ultima_partida(puntos: int, monedas_ganadas: int, tiempo_sobrevivido: float = 0.0):
+	# Calcular si es nuevo récord
+	var nuevo_record = puntos > datos_juego["max_puntos"]
+	
+	# Guardar datos de la última partida
+	datos_juego["ultima_partida"] = {
+		"puntos": puntos,
+		"monedas_ganadas": monedas_ganadas,
+		"monedas_totales": datos_juego["monedas_totales"],
+		"nuevo_record": nuevo_record,
+		"tiempo_sobrevivido": tiempo_sobrevivido
+	}
+	
+	# Actualizar estadísticas
+	añadir_monedas(monedas_ganadas)
+	actualizar_max_puntos(puntos)
+	
+	print("🎮 Última partida guardada:")
+	print("  Puntos:", puntos)
+	print("  Monedas ganadas:", monedas_ganadas)
+	print("  Monedas totales:", datos_juego["monedas_totales"])
+	print("  Nuevo récord:", nuevo_record)
+	print("  Tiempo sobrevivido:", tiempo_sobrevivido)
+	
+	guardar_datos()
+
+# Obtener datos de la última partida
+static func obtener_ultima_partida() -> Dictionary:
+	if not "ultima_partida" in datos_juego:
+		return {
+			"puntos": 0,
+			"monedas_ganadas": 0,
+			"monedas_totales": 0,
+			"nuevo_record": false,
+			"tiempo_sobrevivido": 0.0
+		}
+	return datos_juego["ultima_partida"].duplicate()
+
+# Obtener puntos de la última partida
+static func obtener_puntos_ultima_partida() -> int:
+	return datos_juego["ultima_partida"]["puntos"] if "ultima_partida" in datos_juego else 0
+
+# Obtener monedas ganadas en la última partida
+static func obtener_monedas_ultima_partida() -> int:
+	return datos_juego["ultima_partida"]["monedas_ganadas"] if "ultima_partida" in datos_juego else 0
+
+# Verificar si la última partida fue récord
+static func fue_record_ultima_partida() -> bool:
+	return datos_juego["ultima_partida"]["nuevo_record"] if "ultima_partida" in datos_juego else false
+
+# ============================================
+# FUNCIONES ORIGINALES (MANTENIDAS)
+# ============================================
 
 # Añadir monedas
 static func añadir_monedas(cantidad: int):
@@ -108,3 +186,41 @@ static func obtener_max_combo() -> int:
 # Obtener todas las mejoras
 static func obtener_todas_mejoras() -> Dictionary:
 	return datos_juego["mejoras"].duplicate()
+
+# ============================================
+# FUNCIONES DE DEPURACIÓN (NUEVAS)
+# ============================================
+
+# Mostrar todos los datos guardados
+static func imprimir_datos():
+	print("=== DATOS GUARDADOS ===")
+	print("💰 Monedas totales:", datos_juego["monedas_totales"])
+	print("🏆 Máximo puntos:", datos_juego["max_puntos"])
+	print("🔥 Máximo combo:", datos_juego["max_combo"])
+	print("⚡ Mejoras:", datos_juego["mejoras"])
+	print("🎮 Última partida:", datos_juego["ultima_partida"])
+	print("======================")
+
+# Resetear datos (solo para pruebas)
+static func resetear_datos():
+	print("⚠️ RESETEANDO DATOS...")
+	datos_juego = {
+		"monedas_totales": 0,
+		"max_puntos": 0,
+		"max_combo": 0,
+		"mejoras": {
+			"vidas_iniciales": 0,
+			"velocidad": 0,
+			"duracion_poderes": 0,
+			"imanes": 0
+		},
+		"ultima_partida": {
+			"puntos": 0,
+			"monedas_ganadas": 0,
+			"monedas_totales": 0,
+			"nuevo_record": false,
+			"tiempo_sobrevivido": 0.0
+		}
+	}
+	guardar_datos()
+	print("✅ Datos reseteados")

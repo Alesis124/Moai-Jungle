@@ -385,7 +385,7 @@ func _on_moneda_recogido_por_tiempo():
 	monedas_totales += 1
 	
 	# NUEVO: Guardar monedas en archivo
-	guardar_monedas()
+	#guardar_monedas()
 	
 	# Dar puntos por moneda (con combo)
 	añadir_puntos_con_combo(10)  # Más puntos por moneda de tiempo
@@ -467,12 +467,12 @@ func aplicar_mejoras_guardadas():
 		print("🧲 Imanes disponibles: ", mejoras["imanes"])
 
 # NUEVO: Guardar monedas al recoger
-func guardar_monedas():
-	print("💾 Guardando datos...")
-	SistemaGuardado.añadir_monedas(monedas)
-	SistemaGuardado.actualizar_max_puntos(puntos)
-	SistemaGuardado.actualizar_max_combo(max_combo)
-	print("✅ Datos guardados")
+#func guardar_monedas():
+#	print("💾 Guardando datos...")
+#	SistemaGuardado.añadir_monedas(monedas)
+#	SistemaGuardado.actualizar_max_puntos(puntos)
+#	SistemaGuardado.actualizar_max_combo(max_combo)
+#	print("✅ Datos guardados")
 
 # Función para actualizar display de tiempo
 func actualizar_tiempo_display():
@@ -536,29 +536,38 @@ func terminar_juego_por_tiempo():
 	juego_terminado = true
 	tiempo_restante = 0
 	
-	# Calcular recompensa basada en puntos
-	var monedas_ganadas = 20 + int(puntos / 50)  # 20 monedas base + 1 por cada 50 puntos
-	monedas += monedas_ganadas
-	monedas_totales += monedas_ganadas
+	# DEPURACIÓN: Mostrar datos antes de guardar
+	print("🎮 TERMINANDO JUEGO ========================")
+	print("  Puntos finales:", puntos)
+	print("  Monedas recogidas en partida:", monedas)
+	print("  Monedas totales antes:", SistemaGuardado.obtener_monedas())
+	print("  Combo máximo:", max_combo)
+	print("  Tiempo sobrevivido:", tiempo_inicial - tiempo_restante)
 	
-	# NUEVO: Guardar datos finales
-	guardar_monedas()
+	# Calcular recompensa basada en puntos
+	var monedas_ganadas = 20 + int(puntos / 50)
+	print("  Monedas ganadas (recompensa):", monedas_ganadas)
+	
+	# NUEVO: Guardar datos de la última partida
+	var tiempo_sobrevivido = tiempo_inicial - tiempo_restante
+	SistemaGuardado.guardar_ultima_partida(puntos, monedas_ganadas, tiempo_sobrevivido)
+	
+	# También actualizar máximo combo
+	SistemaGuardado.actualizar_max_combo(max_combo)
+	
+	# Mostrar datos guardados
+	SistemaGuardado.imprimir_datos()
 	
 	# Mostrar pantalla de victoria
 	var pantalla_victoria = preload("res://Scenes/pantalla_victoria.tscn").instantiate()
-	pantalla_victoria.get_node("PuntosFinales").text = "Puntos: " + str(puntos)
-	pantalla_victoria.get_node("MonedasGanadas").text = "Monedas: +" + str(monedas_ganadas)
-	pantalla_victoria.get_node("TiempoSobrevivido").text = "Tiempo: " + format_tiempo(tiempo_inicial)
 	
-	# NUEVO: Mostrar datos guardados si están disponibles
-	if datos_guardados:
-		var max_puntos_guardados = datos_guardados.obtener_max_puntos()
-		var max_combo_guardado = datos_guardados.obtener_max_combo()
-		var monedas_totales_guardadas = datos_guardados.obtener_monedas()
-		
-		pantalla_victoria.get_node("MaxPuntos").text = "Récord: " + str(max_puntos_guardados)
-		pantalla_victoria.get_node("MaxCombo").text = "Combo Máx: " + str(max_combo_guardado)
-		pantalla_victoria.get_node("MonedasTotales").text = "Monedas Totales: " + str(monedas_totales_guardadas)
+	# IMPORTANTE: Ocultar los labels que se animarán
+	if pantalla_victoria.has_node("PuntosFinales"):
+		pantalla_victoria.get_node("PuntosFinales").visible = false
+	if pantalla_victoria.has_node("MonedasGanadas"):
+		pantalla_victoria.get_node("MonedasGanadas").visible = false
+	if pantalla_victoria.has_node("Victoria"):
+		pantalla_victoria.get_node("Victoria").visible = false
 	
 	add_child(pantalla_victoria)
 	
@@ -568,6 +577,9 @@ func terminar_juego_por_tiempo():
 	# Sonido de victoria
 	Efectos.stream = preload("res://sounds/8-bit-powerup-6768.mp3")
 	Efectos.play()
+
+
+
 
 # Formatear tiempo para display
 func format_tiempo(segundos: float) -> String:

@@ -1,6 +1,13 @@
 extends AudioStreamPlayer
 
+func _ready():
+	call_deferred("_setup_effects")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	bus="Efectos"
+func _setup_effects():
+	bus = "Efectos"
+	
+	# Aplica el volumen de efectos
+	var effects_volume_db = lerp(-40.0, 0.0, Global.effects_volume)
+	volume_db = effects_volume_db
+	
+	print("Efectos - Volumen aplicado: ", Global.effects_volume * 100, "%")

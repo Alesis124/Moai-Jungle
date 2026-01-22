@@ -9,7 +9,7 @@ extends Control
 @onready var barraMusica = $ColorRect/VolumenMusica
 @onready var barraEfectos = $ColorRect/VolumenEfectos
 
-var global_volume: float = 1.0
+var global_volume: float = 0.75
 var music_volume: float = 1.0
 var effects_volume: float = 1.0
 var espera: bool = false
@@ -17,16 +17,26 @@ var espera: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# DEBUG: Verifica los valores
+	print("=== MENÚ SONIDO CARGADO ===")
+	print("Global.music_volume: ", Global.music_volume)  # Debería ser 0.75
+	
+	# Establece los valores de las barras DESDE Global
 	barraGeneral.value = Global.global_volume * 100
-	barraMusica.value = Global.music_volume * 100
+	barraMusica.value = Global.music_volume * 100      # Debería ser 75
 	barraEfectos.value = Global.effects_volume * 100
+	
+	# Muestra los porcentajes
+	porcentaje.text = str(int(barraGeneral.value)) + " %"
+	porcentaje2.text = str(int(barraMusica.value)) + " %"  # Debería mostrar "75 %"
+	porcentaje3.text = str(int(barraEfectos.value)) + " %"
+	
 	espera = true
 	
-	
-	porcentaje.text = str(int(barraGeneral.value))+" %"
-	porcentaje2.text = str(int(barraMusica.value))+" %"
-	porcentaje3.text = str(int(barraEfectos.value))+" %"
-	
+	# Aplica el volumen actual a la música (por si acaso)
+	if Global.music_volume > 0:
+		var volume_db = lerp(-40.0, 0.0, Global.music_volume)
+		music.volume_db = volume_db
 
 
 

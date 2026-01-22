@@ -1,9 +1,19 @@
 extends AudioStreamPlayer
 
 func _ready():
-	# Configura el audio para que no se detenga al cambiar de escena
-	bus = "Master"  # Asegúrate de que esté en el bus correcto
-	autoplay = true  # Si quieres que comience a reproducirse automáticamente
+	# Espera un frame para asegurar que Global ya se cargó
+	call_deferred("_setup_audio")
+
+func _setup_audio():
+	bus = "Master"
+	autoplay = true
+	
+	# Aplica el volumen de música (75%)
+	var music_volume_db = lerp(-40.0, 0.0, Global.music_volume)
+	volume_db = music_volume_db
+	
+	print("GlobalAudio - Volumen aplicado: ", Global.music_volume * 100, "%")
+	
 	if not playing:
 		stream = preload("res://sounds/level-7-27947.mp3")
 		stream.loop = true
