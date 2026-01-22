@@ -94,8 +94,9 @@ var tiempo_desde_ultimo_combo = 0.0
 var combo_fade_timer = 0.0
 var combo_fade_duration = 1.0  # 1 segundo para desvanecerse completamente
 
-
-
+# ============================================
+# NUEVAS FUNCIONES PARA EL SISTEMA DE MEJORAS
+# ============================================
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -113,7 +114,7 @@ func _ready() -> void:
 	# NUEVO: Aplicar mejoras compradas
 	aplicar_mejoras_guardadas()
 
-	# Timers separados para cada poder
+	# Timers separados para cada poder - CON DURACIONES DINÁMICAS
 	timer_escudo = Timer.new()
 	timer_ala = Timer.new()
 	timer_zapa = Timer.new()
@@ -132,10 +133,8 @@ func _ready() -> void:
 	particula_timer.autostart = true
 	particula_timer.timeout.connect(_on_particula_timer_timeout)
 
-	timer_escudo.wait_time = 5.0
-	timer_ala.wait_time = 5.0
-	timer_zapa.wait_time = 5.0
-	timer_iman.wait_time = 5.0
+	# Configurar tiempos iniciales basados en el sistema de guardado
+	actualizar_duraciones_poderes()
 
 	timer_escudo.timeout.connect(_fin_escudo)
 	timer_ala.timeout.connect(_fin_ala)
@@ -168,13 +167,6 @@ func _ready() -> void:
 	# Inicializar puntos label
 	if puntos_label:
 		puntos_label.text = "Puntos: 0"
-
-
-
-
-
-
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -293,6 +285,76 @@ func _process(delta: float) -> void:
 	if iman_activado:
 		atraer_items()
 
+# ============================================
+# NUEVO: SISTEMA DE MEJORAS COMPLETO
+# ============================================
+
+# Función para cargar datos guardados
+func cargar_datos_guardados():
+	print("📂 Cargando datos guardados...")
+	
+	# Cargar datos (se crearán automáticamente si no existen)
+	SistemaGuardado.cargar_datos()
+	
+	monedas_totales = SistemaGuardado.obtener_monedas()
+	print("💰 Monedas totales cargadas: ", monedas_totales)
+
+# En la función aplicar_mejoras_guardadas() del juego_2.gd, cámbiala por esta versión:
+func aplicar_mejoras_guardadas():
+	print("⚡ Aplicando mejoras guardadas...")
+	
+	# Obtener todas las mejoras (sistema antiguo de compatibilidad)
+	var mejoras_guardadas = SistemaGuardado.obtener_todas_mejoras()
+	
+	# Aplicar mejoras de vidas iniciales
+	var vidas_extra = mejoras_guardadas.get("vidas_iniciales", 0)
+	if vidas_extra > 0:
+		vida += vidas_extra
+		textoVidas.text = "Vidas: " + str(vida)
+		print("❤️ Vidas extra: +", vidas_extra)
+	
+	# Aplicar mejoras de velocidad
+	var velocidad_extra_valor = mejoras_guardadas.get("velocidad", 0)
+	if velocidad_extra_valor > 0 and jugador.has_method("set_velocidad"):
+		# Asumiendo que el jugador tiene una variable VELOCIDAD que podemos modificar
+		if "VELOCIDAD" in jugador:
+			jugador.VELOCIDAD += velocidad_extra_valor * 50
+			print("⚡ Velocidad extra: +", velocidad_extra_valor * 50)
+	
+	# Aplicar mejoras de duración de poderes
+	var duracion_extra = mejoras_guardadas.get("duracion_poderes", 0)
+	if duracion_extra > 0:
+		# Las duraciones ahora se manejan en actualizar_duraciones_poderes()
+		print("⏱️ Duración extra poderes (compatibilidad): +", duracion_extra)
+	
+	# Aplicar mejoras de imanes
+	mejoras["imanes"] = mejoras_guardadas.get("imanes", 0)
+	if mejoras["imanes"] > 0:
+		print("🧲 Imanes disponibles: ", mejoras["imanes"])
+
+# NUEVO: Actualizar duraciones de poderes desde el sistema de guardado
+func actualizar_duraciones_poderes():
+	# Configurar tiempos iniciales basados en el sistema de guardado
+	var duracion_escudo = SistemaGuardado.obtener_duracion_poder("escudo")
+	var duracion_alas = SistemaGuardado.obtener_duracion_poder("alas")
+	var duracion_zapatillas = SistemaGuardado.obtener_duracion_poder("zapatillas")
+	
+	if timer_escudo:
+		timer_escudo.wait_time = duracion_escudo
+		print("🛡️ Duración escudo: ", duracion_escudo, " segundos")
+	
+	if timer_ala:
+		timer_ala.wait_time = duracion_alas
+		print("🪽 Duración alas: ", duracion_alas, " segundos")
+	
+	if timer_zapa:
+		timer_zapa.wait_time = duracion_zapatillas
+		print("👟 Duración zapatillas: ", duracion_zapatillas, " segundos")
+	
+	# Configurar también el timer del imán con la duración del escudo
+	if timer_iman:
+		timer_iman.wait_time = duracion_escudo
+
 # NUEVO: Función para crear objetos basados en tiempo
 func crear_objetos_por_tiempo(delta: float):
 	# Calcular tiempo transcurrido
@@ -380,12 +442,45 @@ func crear_powerup_por_tiempo():
 	)
 
 # NUEVO: Función para moneda creada por tiempo
+# NUEVO: Función para cuando recoges una moneda normal
+func _on_moneda_recogido():
+	monedas += 1
+	monedas_totales += 1
+	
+	# NUEVO: Guardar moneda inmediatamente
+	SistemaGuardado.añadir_monedas(1)
+	
+	# Dar puntos por moneda (con combo)
+	añadir_puntos_con_combo(5)  # Puntos por moneda normal
+	
+	# Mostrar partículas
+	crear_particulas(jugador.position, Color(1, 1, 0), 15)
+	
+	# Sonido de moneda
+	Efectos.stream = preload("res://sounds/8-bit-powerup-6768.mp3")  # Asegúrate de tener este sonido
+	Efectos.play()
+	
+	# Mostrar texto flotante
+	var rotacion = randf_range(-0.2, 0.2)
+	mostrar_texto_flotante_en_posicion(
+		"+%d" % int(5 * combo_multiplier),
+		Color(1, 1, 0),
+		jugador.position - Vector2(0, 40),
+		24,
+		rotacion
+	)
+	
+	# Actualizar monedas label
+	if monedas_label:
+		monedas_label.text = "Monedas: " + str(monedas)
+
+# NUEVO: Función para moneda creada por tiempo (también actualizada)
 func _on_moneda_recogido_por_tiempo():
 	monedas += 1
 	monedas_totales += 1
 	
-	# NUEVO: Guardar monedas en archivo
-	#guardar_monedas()
+	# NUEVO: Guardar moneda inmediatamente
+	SistemaGuardado.añadir_monedas(1)
 	
 	# Dar puntos por moneda (con combo)
 	añadir_puntos_con_combo(10)  # Más puntos por moneda de tiempo
@@ -419,60 +514,6 @@ func _on_moneda_recogido_por_tiempo():
 	if monedas_label:
 		monedas_label.text = "Monedas: " + str(monedas)
 
-# NUEVO: Referencia al sistema de guardado
-
-
-# NUEVO: Función para cargar datos guardados
-func cargar_datos_guardados():
-	print("📂 Cargando datos guardados...")
-	
-	# Cargar datos (se crearán automáticamente si no existen)
-	SistemaGuardado.cargar_datos()
-	
-	monedas_totales = SistemaGuardado.obtener_monedas()
-	print("💰 Monedas totales cargadas: ", monedas_totales)
-
-# NUEVO: Aplicar mejoras compradas
-func aplicar_mejoras_guardadas():
-	print("⚡ Aplicando mejoras guardadas...")
-	
-	# Obtener todas las mejoras
-	var mejoras_guardadas = SistemaGuardado.obtener_todas_mejoras()
-	
-	# Aplicar mejoras de vidas iniciales
-	var vidas_extra = mejoras_guardadas["vidas_iniciales"]
-	if vidas_extra > 0:
-		vida += vidas_extra
-		textoVidas.text = "Vidas: " + str(vida)
-		print("❤️ Vidas extra: +", vidas_extra)
-	
-	# Aplicar mejoras de velocidad
-	var velocidad_extra_valor = mejoras_guardadas["velocidad"]
-	if velocidad_extra_valor > 0 and jugador.has_method("set_velocidad"):
-		jugador.VELOCIDAD += velocidad_extra_valor * 50
-		print("⚡ Velocidad extra: +", velocidad_extra_valor * 50)
-	
-	# Aplicar mejoras de duración de poderes
-	var duracion_extra = mejoras_guardadas["duracion_poderes"]
-	if duracion_extra > 0:
-		timer_escudo.wait_time = 5.0 + duracion_extra
-		timer_ala.wait_time = 5.0 + duracion_extra
-		timer_zapa.wait_time = 5.0 + duracion_extra
-		timer_iman.wait_time = 5.0 + duracion_extra
-		print("⏱️ Duración extra poderes: +", duracion_extra)
-	
-	# Aplicar mejoras de imanes
-	mejoras["imanes"] = mejoras_guardadas["imanes"]
-	if mejoras["imanes"] > 0:
-		print("🧲 Imanes disponibles: ", mejoras["imanes"])
-
-# NUEVO: Guardar monedas al recoger
-#func guardar_monedas():
-#	print("💾 Guardando datos...")
-#	SistemaGuardado.añadir_monedas(monedas)
-#	SistemaGuardado.actualizar_max_puntos(puntos)
-#	SistemaGuardado.actualizar_max_combo(max_combo)
-#	print("✅ Datos guardados")
 
 # Función para actualizar display de tiempo
 func actualizar_tiempo_display():
@@ -578,9 +619,6 @@ func terminar_juego_por_tiempo():
 	Efectos.stream = preload("res://sounds/8-bit-powerup-6768.mp3")
 	Efectos.play()
 
-
-
-
 # Formatear tiempo para display
 func format_tiempo(segundos: float) -> String:
 	var minutos = int(segundos) / 60
@@ -655,8 +693,6 @@ func mostrar_combo():
 			Efectos.stream = preload("res://sounds/8-bit-powerup-6768.mp3")
 			Efectos.play()
 
-
-
 func reset_combo():
 	if combo > 1:
 		crear_particulas(jugador.position, Color(1, 0, 0), 10)
@@ -680,8 +716,6 @@ func reset_combo():
 		combo_label.visible = false
 		combo_label.modulate.a = 1.0  # Restaurar opacidad
 		combo_label.scale = Vector2(1.0, 1.0)  # Restaurar tamaño
-
-
 
 # Función principal para mostrar texto flotante
 func mostrar_texto_flotante_en_posicion(texto: String, color: Color, posicion: Vector2, tamaño: int = 20, rotacion: float = 0.0):
@@ -805,7 +839,7 @@ func atraer_items():
 			item.position += direccion * 200 * get_process_delta_time()
 
 # ============================================
-# FUNCIONES DE POWER-UPS (MANTENIDAS)
+# FUNCIONES DE POWER-UPS (ACTUALIZADAS CON DURACIONES DINÁMICAS)
 # ============================================
 
 func _on_corazon_recogido():
@@ -827,19 +861,36 @@ func _on_corazon_recogido():
 
 func _on_escudo_recogido():
 	invulnerable = true
-	duracion.max_value = 5.0
-	duracion.value = 5.0
+	
+	# NUEVO: Obtener duración del sistema guardado
+	var duracion_escudo = SistemaGuardado.obtener_duracion_poder("escudo")
+	
+	duracion.max_value = duracion_escudo
+	duracion.value = duracion_escudo
 	duracion.visible = true
+	
+	# Configurar timer con la duración correcta
+	timer_escudo.wait_time = duracion_escudo
 	timer_escudo.start()
 	
-	# Mostrar texto
+	# Mostrar texto con información de nivel
+	var nivel_actual = SistemaGuardado.obtener_nivel_actual("escudo")
 	var rotacion = randf_range(-0.2, 0.2)
 	mostrar_texto_flotante_en_posicion(
-		"INVULNERABLE",
+		"ESCUDO NIVEL " + str(nivel_actual),
 		Color(0, 0.5, 1),
 		jugador.position - Vector2(0, 40),
 		24,
 		rotacion
+	)
+	
+	# Mostrar duración
+	mostrar_texto_flotante_en_posicion(
+		str(duracion_escudo) + "s",
+		Color(0.8, 0.9, 1),
+		jugador.position - Vector2(0, 60),
+		20,
+		rotacion + 0.1
 	)
 	
 	# Efecto visual
@@ -850,38 +901,72 @@ func _on_escudo_recogido():
 
 func _on_ala_recogida():
 	doble_salto = true
-	duracion.max_value = 5.0
-	duracion.value = 5.0
+	
+	# NUEVO: Obtener duración del sistema guardado
+	var duracion_alas = SistemaGuardado.obtener_duracion_poder("alas")
+	
+	duracion.max_value = duracion_alas
+	duracion.value = duracion_alas
 	duracion.visible = true
+	
+	# Configurar timer con la duración correcta
+	timer_ala.wait_time = duracion_alas
 	timer_ala.start()
 	
-	# Mostrar texto
+	# Mostrar texto con información de nivel
+	var nivel_actual = SistemaGuardado.obtener_nivel_actual("alas")
 	var rotacion = randf_range(-0.2, 0.2)
 	mostrar_texto_flotante_en_posicion(
-		"DOBLE SALTO",
+		"ALAS NIVEL " + str(nivel_actual),
 		Color(1, 1, 0),
 		jugador.position - Vector2(0, 40),
 		24,
 		rotacion
 	)
 	
+	# Mostrar duración
+	mostrar_texto_flotante_en_posicion(
+		str(duracion_alas) + "s",
+		Color(1, 1, 0.5),
+		jugador.position - Vector2(0, 60),
+		20,
+		rotacion + 0.1
+	)
+	
 	crear_particulas(jugador.position, Color(1, 1, 0), 25)
 
 func _on_zapatilla_recogida():
 	velocidad_extra = true
-	duracion.max_value = 5.0
-	duracion.value = 5.0
+	
+	# NUEVO: Obtener duración del sistema guardado
+	var duracion_zapatillas = SistemaGuardado.obtener_duracion_poder("zapatillas")
+	
+	duracion.max_value = duracion_zapatillas
+	duracion.value = duracion_zapatillas
 	duracion.visible = true
+	
+	# Configurar timer con la duración correcta
+	timer_zapa.wait_time = duracion_zapatillas
 	timer_zapa.start()
 	
-	# Mostrar texto
+	# Mostrar texto con información de nivel
+	var nivel_actual = SistemaGuardado.obtener_nivel_actual("zapatillas")
 	var rotacion = randf_range(-0.2, 0.2)
 	mostrar_texto_flotante_en_posicion(
-		"VELOCIDAD+",
+		"ZAPATILLAS NIVEL " + str(nivel_actual),
 		Color(1, 0.5, 1),
 		jugador.position - Vector2(0, 40),
 		24,
 		rotacion
+	)
+	
+	# Mostrar duración
+	mostrar_texto_flotante_en_posicion(
+		str(duracion_zapatillas) + "s",
+		Color(1, 0.7, 1),
+		jugador.position - Vector2(0, 60),
+		20,
+		rotacion + 0.1
 	)
 	
 	var jugador_sprite = jugador.get_node_or_null("Sprite2D")
@@ -890,9 +975,15 @@ func _on_zapatilla_recogida():
 
 func _on_iman_recogido():
 	iman_activado = true
-	duracion.max_value = 5.0
-	duracion.value = 5.0
+	
+	# NUEVO: Usar la duración del escudo como referencia para el imán
+	var duracion_iman = SistemaGuardado.obtener_duracion_poder("escudo")
+	
+	duracion.max_value = duracion_iman
+	duracion.value = duracion_iman
 	duracion.visible = true
+	
+	timer_iman.wait_time = duracion_iman
 	timer_iman.start()
 	
 	var jugador_sprite = jugador.get_node_or_null("Sprite2D")
@@ -991,10 +1082,11 @@ func crear_coco():
 # DETECCIÓN DE DAÑO
 # ============================================
 
+# En la función detecta(), quita la llamada a guardar monedas
 func detecta(body):
 	# Verificar si es una moneda primero
 	if body.has_method("_on_moneda_recogido") or "coin" in body.name.to_lower():
-		return
+		return  # Ya no llamamos a guardar aquí, se guarda en _on_moneda_recogido()
 	
 	if body == nCorazon or body == nEscudo or body == nAla or body == nZapa:
 		Efectos.stream = preload("res://sounds/8-bit-powerup-6768.mp3")

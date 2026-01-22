@@ -14,3 +14,7 @@ func _on_btn_back_pressed() -> void:
 
 func _on_juego_1_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/juego_2.tscn")
+
+
+func _on_btn_upgrade_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/upgrade.tscn")

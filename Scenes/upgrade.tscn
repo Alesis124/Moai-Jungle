@@ -1,0 +1,491 @@
+[gd_scene load_steps=10 format=3 uid="uid://dhgrhpo18ghbc"]
+
+[ext_resource type="Script" uid="uid://86p78x6ily7l" path="res://Scripts/upgrade.gd" id="1_3cn7b"]
+[ext_resource type="FontFile" uid="uid://dw731pysbful3" path="res://fuente/daydream_3/Daydream.ttf" id="1_47it6"]
+[ext_resource type="Texture2D" uid="uid://caycfluxa0dsv" path="res://images/shield.png" id="2_o0s84"]
+[ext_resource type="Texture2D" uid="uid://conmsj2mp4l6g" path="res://images/menos.png" id="3_d2ffm"]
+[ext_resource type="Texture2D" uid="uid://b67mjep83t4c7" path="res://images/mas.png" id="4_d2ffm"]
+[ext_resource type="Texture2D" uid="uid://bm11brrw54vgm" path="res://images/mejora_imagen.png" id="5_uudjn"]
+[ext_resource type="Texture2D" uid="uid://dv5eblwt6bbtl" path="res://images/ala.png" id="6_l3hin"]
+[ext_resource type="Texture2D" uid="uid://c3abjxrv8lpfo" path="res://images/zapatilla.png" id="7_3cn7b"]
+[ext_resource type="Texture2D" uid="uid://cfmsm4hf2yuwp" path="res://images/atras.png" id="8_gmttu"]
+
+[node name="Upgrade" type="CanvasLayer"]
+script = ExtResource("1_3cn7b")
+
+[node name="fondo" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6313726)
+
+[node name="Texto_mejoras" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.029000001
+anchor_right = 0.62200004
+anchor_bottom = 0.134
+offset_left = 0.08798218
+offset_top = -1.7919998
+offset_right = 0.45593262
+offset_bottom = 0.16799927
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_47it6")
+theme_override_font_sizes/font_size = 37
+text = "Mejoras"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel_escudo" type="Panel" parent="."]
+clip_contents = true
+anchors_preset = -1
+anchor_top = 0.18800001
+anchor_right = 1.001
+anchor_bottom = 0.46100003
+offset_top = 0.17599487
+offset_right = -0.15209961
+offset_bottom = 0.27197266
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="imagen_escudo" type="TextureRect" parent="Panel_escudo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.096
+anchor_right = 0.24400002
+anchor_bottom = 0.87600005
+offset_left = 0.31199646
+offset_right = 3.6679688
+offset_bottom = 19.947998
+texture = ExtResource("2_o0s84")
+expand_mode = 2
+
+[node name="menos_escudo" type="Button" parent="Panel_escudo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25300002
+anchor_top = 0.30100003
+anchor_right = 0.307
+anchor_bottom = 0.638
+offset_left = 0.2909851
+offset_top = 0.72299576
+offset_right = 0.0289917
+offset_bottom = 0.0739975
+icon = ExtResource("3_d2ffm")
+flat = true
+expand_icon = true
+
+[node name="escudo_lvl1" type="ColorRect" parent="Panel_escudo"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 42.0
+offset_right = 440.0
+offset_bottom = 133.0
+color = Color(0.2784314, 0.2784314, 0.2784314, 1)
+
+[node name="escudo_lvl2" type="ColorRect" parent="Panel_escudo"]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 42.0
+offset_right = 490.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="escudo_lvl3" type="ColorRect" parent="Panel_escudo"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 42.0
+offset_right = 540.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="escudo_lvl4" type="ColorRect" parent="Panel_escudo"]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 42.0
+offset_right = 590.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="escudo_lvl5" type="ColorRect" parent="Panel_escudo"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 42.0
+offset_right = 640.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="escudo_lvl6" type="ColorRect" parent="Panel_escudo"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 42.0
+offset_right = 690.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="escudo_lvl7" type="ColorRect" parent="Panel_escudo"]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 42.0
+offset_right = 740.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="mas_escudo" type="Button" parent="Panel_escudo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.666
+anchor_top = 0.30100003
+anchor_right = 0.71900004
+anchor_bottom = 0.67200005
+offset_left = -0.89801025
+offset_top = 0.72299576
+offset_right = -0.007019043
+offset_bottom = 0.055992126
+icon = ExtResource("4_d2ffm")
+flat = true
+expand_icon = true
+
+[node name="subir_lvl_escudo" type="Button" parent="Panel_escudo"]
+layout_mode = 0
+offset_left = 905.0
+offset_top = 27.0
+offset_right = 1016.0
+offset_bottom = 139.0
+icon = ExtResource("5_uudjn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="precio_escudo" type="Label" parent="Panel_escudo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86600006
+anchor_top = 0.379
+anchor_right = 0.989
+anchor_bottom = 0.64400005
+offset_left = 0.5019531
+offset_top = -0.08300018
+offset_right = -0.3170166
+offset_bottom = 0.011993408
+theme_override_colors/font_color = Color(1, 1, 0.21508199, 1)
+theme_override_fonts/font = ExtResource("1_47it6")
+theme_override_font_sizes/font_size = 16
+text = "X 
+monedas"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel_alas" type="Panel" parent="."]
+clip_contents = true
+anchors_preset = -1
+anchor_top = 0.18800001
+anchor_right = 1.001
+anchor_bottom = 0.46100003
+offset_left = -1.0
+offset_top = 174.176
+offset_right = -1.1520996
+offset_bottom = 174.27197
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="imagen_alas" type="TextureRect" parent="Panel_alas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.096
+anchor_right = 0.24400002
+anchor_bottom = 0.87600005
+offset_left = 0.31199646
+offset_right = 3.6679688
+offset_bottom = 19.947998
+texture = ExtResource("6_l3hin")
+expand_mode = 2
+
+[node name="menos_alas" type="Button" parent="Panel_alas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25300002
+anchor_top = 0.30100003
+anchor_right = 0.307
+anchor_bottom = 0.638
+offset_left = 0.2909851
+offset_top = 0.72299576
+offset_right = 0.0289917
+offset_bottom = 0.0739975
+icon = ExtResource("3_d2ffm")
+flat = true
+expand_icon = true
+
+[node name="alas_lvl1" type="ColorRect" parent="Panel_alas"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 42.0
+offset_right = 440.0
+offset_bottom = 133.0
+color = Color(0.2784314, 0.2784314, 0.2784314, 1)
+
+[node name="alas_lvl2" type="ColorRect" parent="Panel_alas"]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 42.0
+offset_right = 490.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="alas_lvl3" type="ColorRect" parent="Panel_alas"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 42.0
+offset_right = 540.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="alas_lvl4" type="ColorRect" parent="Panel_alas"]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 42.0
+offset_right = 590.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="alas_lvl5" type="ColorRect" parent="Panel_alas"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 42.0
+offset_right = 640.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="alas_lvl6" type="ColorRect" parent="Panel_alas"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 42.0
+offset_right = 690.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="alas_lvl7" type="ColorRect" parent="Panel_alas"]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 42.0
+offset_right = 740.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="mas_alas" type="Button" parent="Panel_alas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.666
+anchor_top = 0.30100003
+anchor_right = 0.71900004
+anchor_bottom = 0.67200005
+offset_left = -0.89801025
+offset_top = 0.72299576
+offset_right = -0.007019043
+offset_bottom = 0.055992126
+icon = ExtResource("4_d2ffm")
+flat = true
+expand_icon = true
+
+[node name="subir_lvl_alas" type="Button" parent="Panel_alas"]
+layout_mode = 0
+offset_left = 905.0
+offset_top = 27.0
+offset_right = 1016.0
+offset_bottom = 139.0
+icon = ExtResource("5_uudjn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="precio_alas" type="Label" parent="Panel_alas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86600006
+anchor_top = 0.379
+anchor_right = 0.989
+anchor_bottom = 0.64400005
+offset_left = 0.5019531
+offset_top = -0.08300018
+offset_right = -0.3170166
+offset_bottom = 0.011993408
+theme_override_colors/font_color = Color(1, 1, 0.21508199, 1)
+theme_override_fonts/font = ExtResource("1_47it6")
+theme_override_font_sizes/font_size = 16
+text = "X 
+monedas"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel_zapatillas" type="Panel" parent="."]
+clip_contents = true
+anchors_preset = -1
+anchor_top = 0.18800001
+anchor_right = 1.001
+anchor_bottom = 0.46100003
+offset_left = 2.0
+offset_top = 348.176
+offset_right = 1.8479004
+offset_bottom = 348.27197
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="imagen_zapatillas" type="TextureRect" parent="Panel_zapatillas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.085
+anchor_right = 0.23700002
+anchor_bottom = 0.78000003
+offset_left = -0.0049972534
+offset_top = 2.0
+offset_right = -0.26101685
+offset_bottom = -0.060012817
+texture = ExtResource("7_3cn7b")
+expand_mode = 2
+
+[node name="menos_zapatillas" type="Button" parent="Panel_zapatillas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25300002
+anchor_top = 0.30100003
+anchor_right = 0.307
+anchor_bottom = 0.638
+offset_left = 0.2909851
+offset_top = 0.72299576
+offset_right = 0.0289917
+offset_bottom = 0.0739975
+icon = ExtResource("3_d2ffm")
+flat = true
+expand_icon = true
+
+[node name="zapatillas_lvl1" type="ColorRect" parent="Panel_zapatillas"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 42.0
+offset_right = 440.0
+offset_bottom = 133.0
+color = Color(0.2784314, 0.2784314, 0.2784314, 1)
+
+[node name="zapatillas_lvl2" type="ColorRect" parent="Panel_zapatillas"]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 42.0
+offset_right = 490.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="zapatillas_lvl3" type="ColorRect" parent="Panel_zapatillas"]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 42.0
+offset_right = 540.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="zapatillas_lvl4" type="ColorRect" parent="Panel_zapatillas"]
+layout_mode = 0
+offset_left = 550.0
+offset_top = 42.0
+offset_right = 590.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="zapatillas_lvl5" type="ColorRect" parent="Panel_zapatillas"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 42.0
+offset_right = 640.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="zapatillas_lvl6" type="ColorRect" parent="Panel_zapatillas"]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 42.0
+offset_right = 690.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="zapatillas_lvl7" type="ColorRect" parent="Panel_zapatillas"]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 42.0
+offset_right = 740.0
+offset_bottom = 133.0
+color = Color(0.27752772, 0.27752775, 0.27752766, 1)
+
+[node name="mas_zapatillas" type="Button" parent="Panel_zapatillas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.666
+anchor_top = 0.30100003
+anchor_right = 0.71900004
+anchor_bottom = 0.67200005
+offset_left = -0.89801025
+offset_top = 0.72299576
+offset_right = -0.007019043
+offset_bottom = 0.055992126
+icon = ExtResource("4_d2ffm")
+flat = true
+expand_icon = true
+
+[node name="subir_lvl_zapatillas" type="Button" parent="Panel_zapatillas"]
+layout_mode = 0
+offset_left = 905.0
+offset_top = 27.0
+offset_right = 1016.0
+offset_bottom = 139.0
+icon = ExtResource("5_uudjn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="precio_zapatillas" type="Label" parent="Panel_zapatillas"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86600006
+anchor_top = 0.379
+anchor_right = 0.989
+anchor_bottom = 0.64400005
+offset_left = 0.5019531
+offset_top = -0.08300018
+offset_right = -0.3170166
+offset_bottom = 0.011993408
+theme_override_colors/font_color = Color(1, 1, 0.21508199, 1)
+theme_override_fonts/font = ExtResource("1_47it6")
+theme_override_font_sizes/font_size = 16
+text = "X 
+monedas"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnBack" type="Button" parent="."]
+offset_right = 74.0
+offset_bottom = 79.0
+icon = ExtResource("8_gmttu")
+flat = true
+expand_icon = true
+
+[node name="Level_up" type="Label" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.316
+anchor_top = 0.46100003
+anchor_right = 0.67200005
+anchor_bottom = 0.735
+offset_left = -0.03201294
+offset_top = 0.27197266
+offset_right = -0.14404297
+offset_bottom = -0.27999878
+theme_override_colors/font_color = Color(0.49010885, 1, 0.3671535, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("1_47it6")
+theme_override_font_sizes/font_size = 50
+text = "Level Up!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="btnBack" to="." method="_on_btn_back_pressed"]
