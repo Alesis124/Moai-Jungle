@@ -742,8 +742,8 @@ func mostrar_texto_flotante_en_posicion(texto: String, color: Color, posicion: V
 func puntos_por_esquivar_barril(barril_pos: Vector2):
 	var distancia = jugador.position.distance_to(barril_pos)
 	
-	if distancia < 80:  # Muy cerca del barril
-		var puntos_extra = int(50 / (distancia + 1))  # Más puntos cuanto más cerca
+	if distancia < 100:  # Muy cerca del barril
+		var puntos_extra = int(120 / (distancia+1))  # Más puntos cuanto más cerca
 		puntos += puntos_extra
 		
 		# Mostrar texto en posición del barril
