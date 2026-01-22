@@ -13,6 +13,7 @@ var vidas = 3
 @onready var sistema_guardado = preload("res://Scripts/SistemaGuardado.gd")
 var datos_guardados = null
 
+var vidas_por_puntos_dadas = 0
 var timer_escudo
 var puntos_tiempo := 0.0
 var barriles_en_pantalla = 0
@@ -221,8 +222,19 @@ func _process(delta: float) -> void:
 	if ahora - tiempo_ultimo_punto > combo_timeout and combo > 0:
 		reset_combo()
 	
-	if puntos % 700:
-		vidas= 1+vidas;
+	var vidas_esperadas = puntos / 1000
+
+	if vidas_esperadas > vidas_por_puntos_dadas:
+		vida += 1
+		vidas_por_puntos_dadas = vidas_esperadas
+		textoVidas.text = "Vidas: " + str(vida)
+
+		mostrar_texto_flotante_en_posicion(
+			"+1 VIDA",
+			Color(1, 0, 0),
+			jugador.position - Vector2(0, 50),
+			26
+		)
 	
 	
 	if puntos_tiempo >= 1.0:
