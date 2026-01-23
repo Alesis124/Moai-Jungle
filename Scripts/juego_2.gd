@@ -1018,7 +1018,7 @@ func terminar_juego_por_tiempo():
 	print("  Combo máximo:", max_combo)
 	print("  Tiempo sobrevivido:", tiempo_inicial - tiempo_restante)
 	
-	var monedas_ganadas = 20 + int(puntos / 50)
+	var monedas_ganadas = 20 + monedas
 	print("  Monedas ganadas (recompensa):", monedas_ganadas)
 	
 	var tiempo_sobrevivido = tiempo_inicial - tiempo_restante
