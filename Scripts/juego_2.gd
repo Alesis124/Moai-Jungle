@@ -99,7 +99,7 @@ var timer_generacion_barriles = null
 var tiempo_entre_barriles = 1.5  # Tiempo inicial entre generación de barriles
 var barriles_generados = 0  # Contador total de barriles generados
 var barriles_por_nivel = [6, 7, 8, 9, 10, 11]  # Barriles máximos por nivel de dificultad
-var velocidad_por_nivel = [100, 180, 210, 250, 300, 390]  # Velocidad por nivel
+var velocidad_por_nivel = [100, 120, 150, 180, 210, 240]  # Velocidad por nivel
 var nivel_actual_barriles = 0  # Nivel de dificultad actual para barriles
 var zonas_seguras = []  # Zonas donde no se pueden generar barriles
 var distancia_minima_entre_barriles = 60  # Distancia mínima entre barriles
@@ -348,7 +348,7 @@ func generar_barril_controlado():
 			barriles_generados += 1
 			
 			# Aumentar dificultad cada cierta cantidad de barriles generados
-			if barriles_generados % 12 == 0 and nivel_actual_barriles < barriles_por_nivel.size() - 1:
+			if barriles_generados % 25 == 0 and nivel_actual_barriles < barriles_por_nivel.size() - 1:
 				aumentar_dificultad_barriles()
 
 # En la función crear_barril_con_control():
