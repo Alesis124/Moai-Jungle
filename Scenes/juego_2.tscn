@@ -41,7 +41,7 @@ position = Vector2(544, 544)
 position = Vector2(-784, -48)
 
 [node name="barril" parent="." instance=ExtResource("5_0m6fm")]
-position = Vector2(-784, 112)
+position = Vector2(-784, 726)
 
 [node name="vidas" type="Label" parent="."]
 anchors_preset = -1

@@ -272,7 +272,7 @@ func actualizar_precios():
 	var precio_escudo_sig = SistemaGuardado.obtener_precio_siguiente_nivel("escudo")
 	if precio_escudo:
 		if precio_escudo_sig > 0:
-			precio_escudo.text = "Precio: " + str(precio_escudo_sig) + " monedas"
+			precio_escudo.text = "Monedas: \n" + str(precio_escudo_sig)
 			if subir_nvl_escudo:
 				subir_nvl_escudo.disabled = false
 		else:
@@ -284,7 +284,7 @@ func actualizar_precios():
 	var precio_alas_sig = SistemaGuardado.obtener_precio_siguiente_nivel("alas")
 	if precio_alas:
 		if precio_alas_sig > 0:
-			precio_alas.text = "Precio: " + str(precio_alas_sig) + " monedas"
+			precio_alas.text = "Monedas: \n" + str(precio_alas_sig)
 			if subir_nvl_alas:
 				subir_nvl_alas.disabled = false
 		else:
@@ -296,7 +296,7 @@ func actualizar_precios():
 	var precio_zapatillas_sig = SistemaGuardado.obtener_precio_siguiente_nivel("zapatillas")
 	if precio_zapatillas:
 		if precio_zapatillas_sig > 0:
-			precio_zapatillas.text = "Precio: " + str(precio_zapatillas_sig) + " monedas"
+			precio_zapatillas.text = "Monedas: \n" + str(precio_zapatillas_sig)
 			if subir_nvl_zapatillas:
 				subir_nvl_zapatillas.disabled = false
 		else:
