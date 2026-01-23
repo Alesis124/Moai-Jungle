@@ -72,11 +72,11 @@ var particula_timer
 @onready var monedas_label = $MonedasLabel
 
 # NUEVAS VARIABLES PARA SISTEMA DE TIEMPO
-var tiempo_restante = 105.0  # 1 minutos y 45 sec
-var tiempo_inicial = 90.0
+var tiempo_restante = 150.0  # 2 minutos y medio
+var tiempo_inicial = 150.0
 var tiempo_supervivencia = 0.0
 var ultimo_punto_supervivencia = 0.0
-var tiempo_por_nivel = 20.0  # Cada 20 segundos aumenta dificultad
+var tiempo_por_nivel = 30.0  # Cada 30 segundos aumenta dificultad
 var tiempo_ultimo_nivel = 0.0
 var nivel_dificultad = 1
 var juego_terminado = false
@@ -220,10 +220,6 @@ func _process(delta: float) -> void:
 	var ahora = Time.get_ticks_msec() / 1000.0
 	if ahora - tiempo_ultimo_punto > combo_timeout and combo > 0:
 		reset_combo()
-	
-	if puntos % 700:
-		vidas= 1+vidas;
-	
 	
 	if puntos_tiempo >= 1.0:
 		# Dar puntos por supervivencia cada segundo
@@ -746,7 +742,7 @@ func mostrar_texto_flotante_en_posicion(texto: String, color: Color, posicion: V
 func puntos_por_esquivar_barril(barril_pos: Vector2):
 	var distancia = jugador.position.distance_to(barril_pos)
 	
-	if distancia < 90:  # Muy cerca del barril
+	if distancia < 100:  # Muy cerca del barril
 		var puntos_extra = int(120 / (distancia+1))  # Más puntos cuanto más cerca
 		puntos += puntos_extra
 		

@@ -68,7 +68,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bdmwa"]
-radius = 21.0
+radius = 24.0
 
 [node name="barril" type="Area2D"]
 script = ExtResource("1_oijj7")
@@ -77,7 +77,7 @@ script = ExtResource("1_oijj7")
 sprite_frames = SubResource("SpriteFrames_ybrvm")
 animation = &"movimiento"
 autoplay = "movimiento"
-frame_progress = 0.632523
+frame_progress = 0.64542
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bdmwa")

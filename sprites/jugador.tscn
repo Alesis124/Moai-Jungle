@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://du4cr6l3rqau2" path="res://images/correr/estatico.png" id="3_v6fbt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fxd7f"]
-size = Vector2(31, 81)
+size = Vector2(46, 90)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rg5q"]
 atlas = ExtResource("2_5gpi3")
@@ -88,14 +88,14 @@ script = ExtResource("1_meia1")
 [node name="muerto" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="muerto"]
-position = Vector2(12.5, -21.5)
+position = Vector2(13, -19)
 shape = SubResource("RectangleShape2D_fxd7f")
 
 [node name="Movimiento_jugador" type="AnimatedSprite2D" parent="."]
 position = Vector2(13.6977, -19.1959)
 scale = Vector2(0.72061, 0.65485)
 sprite_frames = SubResource("SpriteFrames_ac4hc")
-animation = &"caminar"
+animation = &"estatico"
 autoplay = "estatico"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
