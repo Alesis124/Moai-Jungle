@@ -57,6 +57,6 @@ Es un proyecto realizado para la asignatura de **Móviles** en el ciclo de **Des
 
 ## ✉️ Contacto
 
-Si alguna vez retomo este juego y os interesa aportar ideas escribid a contacto@alesismedia.es
+Si alguna vez retomo este juego y os interesa aportar ideas escribid a contacto@alesis.es
 
 
